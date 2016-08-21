@@ -1,6 +1,7 @@
 <?php
 
-class Element {
+class EquivalenceClass {
+	private $elements;
 	private $tag;
 	private $children;
 	private $disorder;
@@ -14,6 +15,11 @@ class Element {
 			$i++;
 		}
 		return $contains;
+	}
+
+	private function combine(EquivalenceClass $other)
+	{
+		$this->elements = array_merge($this->elements, $other->elements);
 	}
 
 	private statis equal($item1, $item2)
@@ -34,11 +40,22 @@ class Element {
 		}
 	}
 
-
-	public function __construct($tag, $children, $disorder)
+	public function addElement(DOMElement $element)
 	{
-		$this->tag = $element->tagName;
-		foreach ($element->childNodes as $elem) {
+		$this->elements[] = $element;
+	}
+
+	public function getElements()
+	{
+		return $this->elements;
+	}
+
+
+	public function __construct(DOMElement $rawElement)
+	{
+		$this->tag = $rawElement->tagName;
+		$this->elements[] = $rawElement;
+		foreach ($rawElement->childNodes as $elem) {
 			if ($elem->nodeType == 1) {
 				$reduced = new Element($elem);
 				if (Element::contains($this->children, $reduced)) {
