@@ -1,0 +1,14 @@
+[div [div [p a], [p a]], [div [p a] [p a] [p a]]]
+
+
+
+[div -> 2*[div p a]]
+[div -> 2*[p a]]
+[div -> 3 * Qout [p a], DOMElem dim]
+Qout p [p -> a, Qout a, DOMEleme p]
+Qout a = [a, DOMElem a]
+
+Qout x * Qout x => Qout x
+
+
+
